@@ -327,7 +327,7 @@
             pdf.text("Stakeholder Brainstorming Form", 10, 10);
 
             // Fetch all form elements
-            const formElements = document.getElementById("stakeholderForm").elements;
+            const formElements = document.getElementById("index").elements;
 
             let y = 20; // Initial vertical offset
 
@@ -345,6 +345,21 @@
             // Save the generated PDF
             pdf.save("Stakeholder_Brainstorming_Form.pdf");
         }
+        
     </script>
+     <div class="section-container">
+                <h2>Section 7: Additional Notes & Suggestions</h2>
+                <label for="additionalNotes">Any Other Considerations:</label>
+                <textarea id="additionalNotes" name="additionalNotes" placeholder="Provide any additional ideas, preferences, or specific concerns not covered above."></textarea>
+            </div>
+
+            <button type="button" onclick="generatePDF()">Save as PDF</button>
+        </form>
+    </div>
+
+    <!-- Include external JavaScript file -->
+    <script src="formSubmission.js"></script>
+</body>
+</html>
 </body>
 </html>

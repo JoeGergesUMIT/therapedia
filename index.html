@@ -311,12 +311,12 @@
                 <textarea id="additionalNotes" name="additionalNotes" placeholder="Provide any additional ideas, preferences, or specific concerns not covered above."></textarea>
             </div>
 
-            <button type="button" onclick="generatePDF()">Save as PDF</button>
+                        <button type="button" onclick="generatePDF()">Save as PDF</button>
         </form>
     </div>
-        <!-- Include external JavaScript file -->
-    <script src="formSubmission.js"></script>
 
+    <!-- Include external JavaScript file -->
+    <script src="formSubmission.js"></script>
 
     <script>
         function generatePDF() {
@@ -336,8 +336,12 @@
                 if (element.type === "checkbox" && element.checked) {
                     pdf.text(`${element.name}: ${element.value}`, 10, y);
                     y += 10;
-                } else if (element.type === "text" || element.tagName === "TEXTAREA") {
-                    pdf.text(`${element.labels[0].innerText}: ${element.value}`, 10, y);
+                } else if ((element.type === "text" || element.tagName === "TEXTAREA") && element.value) {
+                    const label = element.labels ? element.labels[0].innerText : element.name;
+                    pdf.text(`${label}: ${element.value}`, 10, y);
+                    y += 10;
+                } else if (element.type === "radio" && element.checked) {
+                    pdf.text(`${element.name}: ${element.value}`, 10, y);
                     y += 10;
                 }
             }
@@ -345,21 +349,6 @@
             // Save the generated PDF
             pdf.save("Stakeholder_Brainstorming_Form.pdf");
         }
-        
     </script>
-     <div class="section-container">
-                <h2>Section 7: Additional Notes & Suggestions</h2>
-                <label for="additionalNotes">Any Other Considerations:</label>
-                <textarea id="additionalNotes" name="additionalNotes" placeholder="Provide any additional ideas, preferences, or specific concerns not covered above."></textarea>
-            </div>
-
-            <button type="button" onclick="generatePDF()">Save as PDF</button>
-        </form>
-    </div>
-
-    <!-- Include external JavaScript file -->
-    <script src="formSubmission.js"></script>
-</body>
-</html>
 </body>
 </html>

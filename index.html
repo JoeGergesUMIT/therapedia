@@ -320,54 +320,49 @@
         </form>
     </div>
 
+        <!-- JavaScript code at the bottom -->
     <script>
-        window.onload = function () {
-            // Define the generatePDF function only after everything is loaded
-            function generatePDF() {
-                // Find the form with ID "index"
-                const form = document.getElementById("index");
-                if (!form) {
-                    alert("Form not found. Please check the form ID.");
-                    return;
-                }
-
-                // Ensure that jsPDF is loaded correctly
-                if (typeof window.jspdf === 'undefined' || !window.jspdf.jsPDF) {
-                    alert("jsPDF library not loaded correctly.");
-                    return;
-                }
-
-                // Initialize jsPDF
-                const { jsPDF } = window.jspdf;
-                const pdf = new jsPDF();
-
-                pdf.setFontSize(16);
-                pdf.text("Stakeholder Brainstorming Form", 10, 10);
-
-                // Fetch all form elements
-                const formElements = form.elements;
-
-                let y = 20; // Initial vertical offset
-
-                // Iterate over form elements and add their content to the PDF
-                for (let element of formElements) {
-                    if (element.type === "checkbox" && element.checked) {
-                        pdf.text(`${element.name}: ${element.value}`, 10, y);
-                        y += 10;
-                    } else if ((element.type === "text" || element.tagName === "TEXTAREA") && element.value) {
-                        const label = element.labels ? element.labels[0].innerText : element.name;
-                        pdf.text(`${label}: ${element.value}`, 10, y);
-                        y += 10;
-                    }
-                }
-
-                // Save the generated PDF
-                pdf.save("Stakeholder_Brainstorming_Form.pdf");
+        function generatePDF() {
+            // Find the form with ID "index"
+            const form = document.getElementById("index");
+            if (!form) {
+                alert("Form not found. Please check the form ID.");
+                return;
             }
 
-            // Attach the function to the global window object to be accessible in inline events
-            window.generatePDF = generatePDF;
-        };
+            // Ensure that jsPDF is loaded correctly
+            if (typeof window.jspdf === 'undefined' || !window.jspdf.jsPDF) {
+                alert("jsPDF library not loaded correctly.");
+                return;
+            }
+
+            // Initialize jsPDF
+            const { jsPDF } = window.jspdf;
+            const pdf = new jsPDF();
+
+            pdf.setFontSize(16);
+            pdf.text("Stakeholder Brainstorming Form", 10, 10);
+
+            // Fetch all form elements
+            const formElements = form.elements;
+
+            let y = 20; // Initial vertical offset
+
+            // Iterate over form elements and add their content to the PDF
+            for (let element of formElements) {
+                if (element.type === "checkbox" && element.checked) {
+                    pdf.text(`${element.name}: ${element.value}`, 10, y);
+                    y += 10;
+                } else if ((element.type === "text" || element.tagName === "TEXTAREA") && element.value) {
+                    const label = element.labels ? element.labels[0].innerText : element.name;
+                    pdf.text(`${label}: ${element.value}`, 10, y);
+                    y += 10;
+                }
+            }
+
+            // Save the generated PDF
+            pdf.save("Stakeholder_Brainstorming_Form.pdf");
+        }
     </script>
 </body>
 </html>

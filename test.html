@@ -3,7 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <title>Basic PDF Test Form</title>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.4.0/jspdf.umd.min.js"></script>
+    <!-- Load jsPDF library directly from CDN -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.4.0/jspdf.umd.min.js" defer></script>
 </head>
 <body>
     <h1>PDF Test Form</h1>
@@ -18,49 +19,46 @@
     </form>
 
     <script>
-        function generatePDF() {
-            // Ensure that the form with ID "index" exists
-            const form = document.getElementById("index");
-            if (!form) {
-                alert("Form not found. Please check the form ID.");
-                return;
-            }
-
-            // Check if jsPDF is loaded correctly
-            if (typeof jsPDF === 'undefined') {
-                alert("jsPDF library not loaded correctly.");
-                return;
-            }
-
-            const { jsPDF } = window.jspdf;
-            const pdf = new jsPDF();
-
-            pdf.setFontSize(16);
-            pdf.text("Basic PDF Test Form", 10, 10);
-
-            // Fetch all form elements
-            const formElements = form.elements;
-
-            let y = 20; // Initial vertical offset
-
-            // Iterate over form elements and add their content to the PDF
-            for (let element of formElements) {
-                if (element.type === "checkbox" && element.checked) {
-                    pdf.text(`${element.name}: ${element.value}`, 10, y);
-                    y += 10;
-                } else if ((element.type === "text" || element.tagName === "TEXTAREA") && element.value) {
-                    const label = element.labels ? element.labels[0].innerText : element.name;
-                    pdf.text(`${label}: ${element.value}`, 10, y);
-                    y += 10;
-                } else if (element.type === "radio" && element.checked) {
-                    pdf.text(`${element.name}: ${element.value}`, 10, y);
-                    y += 10;
+        // Ensure jsPDF loads only after the script tag is fully processed
+        document.addEventListener('DOMContentLoaded', function () {
+            function generatePDF() {
+                // Check if jsPDF is available
+                if (typeof window.jspdf === 'undefined' || !window.jspdf.jsPDF) {
+                    alert("jsPDF library not loaded correctly.");
+                    return;
                 }
+
+                // Initialize jsPDF
+                const { jsPDF } = window.jspdf;
+                const pdf = new jsPDF();
+
+                pdf.setFontSize(16);
+                pdf.text("Basic PDF Test Form", 10, 10);
+
+                // Fetch all form elements
+                const formElements = document.getElementById("index").elements;
+
+                let y = 20; // Initial vertical offset
+
+                // Iterate over form elements and add their content to the PDF
+                for (let element of formElements) {
+                    if (element.type === "checkbox" && element.checked) {
+                        pdf.text(`${element.name}: ${element.value}`, 10, y);
+                        y += 10;
+                    } else if ((element.type === "text" || element.tagName === "TEXTAREA") && element.value) {
+                        const label = element.labels ? element.labels[0].innerText : element.name;
+                        pdf.text(`${label}: ${element.value}`, 10, y);
+                        y += 10;
+                    }
+                }
+
+                // Save the generated PDF
+                pdf.save("Test_Form.pdf");
             }
 
-            // Save the generated PDF
-            pdf.save("Test_Form.pdf");
-        }
+            // Attach the function to the global window object to be accessible in inline events
+            window.generatePDF = generatePDF;
+        });
     </script>
 </body>
 </html>

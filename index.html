@@ -6,42 +6,62 @@
     <style>
         body {
             font-family: Arial, sans-serif;
-            background-color: #f4f4f4;
+            background-color: #f0f4f8;
             color: #333;
+            line-height: 1.6;
         }
         .container {
             width: 80%;
-            margin: auto;
-            background: white;
-            padding: 20px;
-            border-radius: 8px;
-            box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+            margin: 20px auto;
+            background: #fff;
+            padding: 20px 30px;
+            border-radius: 12px;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
         }
-        h1, h2, h3 {
+        h1 {
+            text-align: center;
+            color: #007BFF;
+        }
+        h2, h3 {
             color: #333;
+            border-bottom: 2px solid #ddd;
+            padding-bottom: 10px;
+            margin-bottom: 20px;
         }
-        label, select, input[type="text"], input[type="checkbox"], textarea {
+        label, select, input[type="text"], input[type="checkbox"], input[type="radio"], textarea {
             display: block;
-            margin: 10px 0;
-        }
-        textarea {
             width: 100%;
-            height: 80px;
+            margin: 10px 0 20px 0;
         }
-        input[type="checkbox"] {
+        input[type="checkbox"], input[type="radio"] {
+            width: auto;
             margin-right: 10px;
         }
+        textarea {
+            height: 100px;
+            resize: none;
+        }
         button[type="submit"] {
-            margin-top: 20px;
-            padding: 10px 20px;
-            background-color: #007BFF;
-            color: white;
+            display: block;
+            width: 100%;
+            background: #007BFF;
+            color: #fff;
             border: none;
-            border-radius: 5px;
+            padding: 15px;
+            border-radius: 8px;
+            font-size: 16px;
             cursor: pointer;
+            transition: background 0.3s ease;
         }
         button[type="submit"]:hover {
-            background-color: #0056b3;
+            background: #0056b3;
+        }
+        .section-container {
+            margin-bottom: 40px;
+        }
+        .hint {
+            font-size: 0.9em;
+            color: #888;
         }
     </style>
 </head>
@@ -50,185 +70,217 @@
         <h1>Stakeholder Brainstorming Form</h1>
 
         <!-- Section 1: Branding & Identity -->
-        <h2>Section 1: Branding & Identity</h2>
+        <div class="section-container">
+            <h2>Section 1: Branding & Identity</h2>
 
-        <h3>Brand Name & Tagline</h3>
-        <label for="proposedName">Proposed Brand Name:</label>
-        <input type="text" id="proposedName" name="proposedName">
+            <h3>Brand Name & Tagline</h3>
+            <label for="proposedName">Proposed Brand Name:</label>
+            <input type="text" id="proposedName" name="proposedName">
 
-        <label for="tagline">Tagline Ideas:</label>
-        <textarea id="tagline" name="tagline" placeholder="Example: 'Your Path to Better Mental Health'"></textarea>
+            <label for="tagline">Tagline Ideas:</label>
+            <textarea id="tagline" name="tagline" placeholder="Example: 'Your Path to Better Mental Health'"></textarea>
 
-        <label for="reason">Reason for Choosing the Brand Name:</label>
-        <textarea id="reason" name="reason" placeholder="Describe why this name is suitable for the brand."></textarea>
+            <label for="reason">Reason for Choosing the Brand Name:</label>
+            <textarea id="reason" name="reason" placeholder="Describe why this name is suitable for the brand."></textarea>
 
-        <h3>Brand Values</h3>
-        <label>Top 5 Core Values to Emphasize:</label>
-        <input type="checkbox" name="values" value="Trustworthy"> Trustworthy<br>
-        <input type="checkbox" name="values" value="Compassionate"> Compassionate<br>
-        <input type="checkbox" name="values" value="Innovative"> Innovative<br>
-        <input type="checkbox" name="values" value="Comprehensive"> Comprehensive<br>
-        <input type="checkbox" name="values" value="Professional"> Professional<br>
-        <input type="checkbox" name="values" value="Supportive"> Supportive<br>
-        <input type="checkbox" name="values" value="Inclusive"> Inclusive<br>
-        <input type="checkbox" name="values" value="User-Friendly"> User-Friendly<br>
-        <input type="text" name="otherValues" placeholder="Other: _____________________________"><br>
+            <h3>Brand Values</h3>
+            <label>Top 5 Core Values to Emphasize:</label>
+            <input type="checkbox" name="values" value="Trustworthy"> Trustworthy<br>
+            <input type="checkbox" name="values" value="Compassionate"> Compassionate<br>
+            <input type="checkbox" name="values" value="Innovative"> Innovative<br>
+            <input type="checkbox" name="values" value="Comprehensive"> Comprehensive<br>
+            <input type="checkbox" name="values" value="Professional"> Professional<br>
+            <input type="checkbox" name="values" value="Supportive"> Supportive<br>
+            <input type="checkbox" name="values" value="Inclusive"> Inclusive<br>
+            <input type="checkbox" name="values" value="User-Friendly"> User-Friendly<br>
+            <input type="text" name="otherValues" placeholder="Other: _____________________________"><br>
 
-        <h3>Audience Definition</h3>
-        <label for="audience">Primary Audience:</label>
-        <textarea id="audience" name="audience" placeholder="Examples: Mental health professionals, patients, caregivers, etc."></textarea>
+            <h3>Audience Definition</h3>
+            <label for="audience">Primary Audience:</label>
+            <textarea id="audience" name="audience" placeholder="Examples: Mental health professionals, patients, caregivers, etc."></textarea>
 
-        <label for="demographics">Demographics:</label>
-        <textarea id="demographics" name="demographics" placeholder="Specify key audience attributes: Age range, gender, income, location, etc."></textarea>
+            <label for="demographics">Demographics:</label>
+            <textarea id="demographics" name="demographics" placeholder="Specify key audience attributes: Age range, gender, income, location, etc."></textarea>
 
-        <label for="painPoints">Audience Pain Points:</label>
-        <textarea id="painPoints" name="painPoints" placeholder="Examples: Difficulty finding therapists, lack of trustworthy information, etc."></textarea>
+            <label for="painPoints">Audience Pain Points:</label>
+            <textarea id="painPoints" name="painPoints" placeholder="Examples: Difficulty finding therapists, lack of trustworthy information, etc."></textarea>
 
-        <h3>Brand Voice</h3>
-        <label for="brandVoice">How Should the Brand Communicate?</label>
-        <textarea id="brandVoice" name="brandVoice" placeholder="Examples: Warm, professional, knowledgeable, supportive, etc."></textarea>
+            <h3>Brand Voice</h3>
+            <label for="brandVoice">How Should the Brand Communicate?</label>
+            <textarea id="brandVoice" name="brandVoice" placeholder="Examples: Warm, professional, knowledgeable, supportive, etc."></textarea>
 
-        <label for="sampleMessaging">Sample Messaging:</label>
-        <textarea id="sampleMessaging" name="sampleMessaging" placeholder="Provide an example message or tone for the brand."></textarea>
+            <label for="sampleMessaging">Sample Messaging:</label>
+            <textarea id="sampleMessaging" name="sampleMessaging" placeholder="Provide an example message or tone for the brand."></textarea>
+        </div>
 
-        <!-- Section 2: Website Design & Aesthetics -->
-        <h2>Section 2: Website Design & Aesthetics</h2>
+        <!-- Section 2: Platform Pages -->
+        <div class="section-container">
+            <h2>Section 2: Platform Pages</h2>
+            <h3>Suggested Platform Pages</h3>
+            <label>Which pages should be included on the platform?</label>
 
-        <h3>Visual Style</h3>
-        <label>Design Approach:</label>
-        <input type="checkbox" name="designStyle" value="Minimalistic"> Minimalistic<br>
-        <input type="checkbox" name="designStyle" value="Modern"> Modern<br>
-        <input type="checkbox" name="designStyle" value="Classic"> Classic<br>
-        <input type="checkbox" name="designStyle" value="Bold & Colorful"> Bold & Colorful<br>
-        <input type="checkbox" name="designStyle" value="Clean & Professional"> Clean & Professional<br>
-        <input type="checkbox" name="designStyle" value="Accessible & User-Friendly"> Accessible & User-Friendly<br>
+            <input type="checkbox" name="pages" value="Home Page"> Home Page (Introduction, Key Features, Highlights)<br>
+            <input type="checkbox" name="pages" value="About Us"> About Us (Mission, Vision, Values, Team)<br>
+            <input type="checkbox" name="pages" value="Services"> Services (List of services offered, descriptions, specialties)<br>
+            <input type="checkbox" name="pages" value="Find a Therapist"> Find a Therapist (Search filters, directory of professionals)<br>
+            <input type="checkbox" name="pages" value="Blog"> Blog (Articles, insights, expert opinions)<br>
+            <input type="checkbox" name="pages" value="Resources"> Resources (Books, case studies, e-books, helpful links)<br>
+            <input type="checkbox" name="pages" value="Contact"> Contact (Contact form, phone number, address)<br>
+            <input type="checkbox" name="pages" value="FAQ"> FAQ (Common questions, platform guidelines)<br>
+            <input type="checkbox" name="pages" value="Support"> Support (Technical help, report an issue)<br>
+            <input type="checkbox" name="pages" value="Testimonials"> Testimonials (Client and therapist feedback)<br>
+            <input type="checkbox" name="pages" value="Legal & Privacy"> Legal & Privacy (Privacy policy, terms of service)<br>
+            <input type="text" name="otherPages" placeholder="Other: _____________________________">
+        </div>
 
-        <label for="colors">Preferred Color Palette:</label>
-        <input type="text" id="colors" name="colors">
+        <!-- Section 3: Website Design & Aesthetics -->
+        <div class="section-container">
+            <h2>Section 3: Website Design & Aesthetics</h2>
 
-        <label for="colorMeaning">Color Meaning/Significance:</label>
-        <textarea id="colorMeaning" name="colorMeaning" placeholder="Describe why these colors represent the brand."></textarea>
+            <h3>Visual Style</h3>
+            <label>Design Approach:</label>
+            <input type="checkbox" name="designStyle" value="Minimalistic"> Minimalistic<br>
+            <input type="checkbox" name="designStyle" value="Modern"> Modern<br>
+            <input type="checkbox" name="designStyle" value="Classic"> Classic<br>
+            <input type="checkbox" name="designStyle" value="Bold & Colorful"> Bold & Colorful<br>
+            <input type="checkbox" name="designStyle" value="Clean & Professional"> Clean & Professional<br>
+            <input type="checkbox" name="designStyle" value="Accessible & User-Friendly"> Accessible & User-Friendly<br>
 
-        <h3>Typography Preferences</h3>
-        <label for="fontStyle">Font Style:</label>
-        <input type="text" id="fontStyle" name="fontStyle" placeholder="Examples: Sans-serif, serif, handwritten, etc.">
+            <label for="colors">Preferred Color Palette:</label>
+            <input type="text" id="colors" name="colors">
 
-        <label for="fontUsage">Font Usage:</label>
-        <textarea id="fontUsage" name="fontUsage" placeholder="Primary heading font and body text font."></textarea>
+            <label for="colorMeaning">Color Meaning/Significance:</label>
+            <textarea id="colorMeaning" name="colorMeaning" placeholder="Describe why these colors represent the brand."></textarea>
 
-        <h3>Visual Inspiration</h3>
-        <label for="inspiration">List 3 Websites or Brands for Inspiration:</label>
-        <textarea id="inspiration" name="inspiration" placeholder="______________________ (Reason: ____________________)"></textarea>
+            <h3>Typography Preferences</h3>
+            <label for="fontStyle">Font Style:</label>
+            <input type="text" id="fontStyle" name="fontStyle" placeholder="Examples: Sans-serif, serif, handwritten, etc.">
 
-        <h3>Mood & Imagery</h3>
-        <label for="imagery">Preferred Style of Imagery:</label>
-        <textarea id="imagery" name="imagery" placeholder="Examples: Real-life photography, illustrations, abstract images, icons, etc."></textarea>
+            <label for="fontUsage">Font Usage:</label>
+            <textarea id="fontUsage" name="fontUsage" placeholder="Primary heading font and body text font."></textarea>
 
-        <label for="moodKeywords">Mood Keywords:</label>
-        <textarea id="moodKeywords" name="moodKeywords" placeholder="Examples: Trust, warmth, openness, clarity, energy, calm."></textarea>
+            <h3>Visual Inspiration</h3>
+            <label for="inspiration">List 3 Websites or Brands for Inspiration:</label>
+            <textarea id="inspiration" name="inspiration" placeholder="______________________ (Reason: ____________________)"></textarea>
 
-        <h3>Additional Design Guidelines</h3>
-        <label for="designGuidelines">Describe any specific elements to include or avoid:</label>
-        <textarea id="designGuidelines" name="designGuidelines"></textarea>
+            <h3>Mood & Imagery</h3>
+            <label for="imagery">Preferred Style of Imagery:</label>
+            <textarea id="imagery" name="imagery" placeholder="Examples: Real-life photography, illustrations, abstract images, icons, etc."></textarea>
 
-        <!-- Section 3: Functional & Technical Requirements -->
-        <h2>Section 3: Functional & Technical Requirements</h2>
+            <label for="moodKeywords">Mood Keywords:</label>
+            <textarea id="moodKeywords" name="moodKeywords" placeholder="Examples: Trust, warmth, openness, clarity, energy, calm."></textarea>
 
-        <h3>Core Features</h3>
-        <label>Key Functionalities to Include:</label>
-        <input type="checkbox" name="coreFeatures" value="Therapist Index & Search"> Therapist Index & Search<br>
-        <input type="checkbox" name="coreFeatures" value="Booking & Scheduling"> Booking & Scheduling<br>
-        <input type="checkbox" name="coreFeatures" value="Client Reviews & Ratings"> Client Reviews & Ratings<br>
-        <input type="checkbox" name="coreFeatures" value="Mental Health Resources/Blog"> Mental Health Resources/Blog<br>
-        <input type="checkbox" name="coreFeatures" value="Forum/Community Discussions"> Forum/Community Discussions<br>
-        <input type="checkbox" name="coreFeatures" value="Chat/Consultation Integration"> Chat/Consultation Integration<br>
-        <input type="checkbox" name="coreFeatures" value="Payment Integration"> Payment Integration<br>
-        <input type="checkbox" name="coreFeatures" value="Dashboard for Professionals"> Dashboard for Professionals<br>
-        <input type="checkbox" name="coreFeatures" value="Video/Audio Sessions"> Video/Audio Sessions<br>
-        <input type="checkbox" name="coreFeatures" value="Resources Library"> Resources Library<br>
+            <h3>Additional Design Guidelines</h3>
+            <label for="designGuidelines">Describe any specific elements to include or avoid:</label>
+            <textarea id="designGuidelines" name="designGuidelines"></textarea>
+        </div>
 
-        <h3>Customization Requirements</h3>
-        <label for="customization">User-Specific Customization:</label>
-        <textarea id="customization" name="customization" placeholder="Examples: Personal dashboards, personalized recommendations."></textarea>
+        <!-- Section 4: Functional & Technical Requirements -->
+        <div class="section-container">
+            <h2>Section 4: Functional & Technical Requirements</h2>
 
-        <label for="contentManagement">Content Management:</label>
-        <textarea id="contentManagement" name="contentManagement" placeholder="How should the site handle content updates?"></textarea>
+            <h3>Core Features</h3>
+            <label>Key Functionalities to Include:</label>
+            <input type="checkbox" name="coreFeatures" value="Therapist Index & Search"> Therapist Index & Search<br>
+            <input type="checkbox" name="coreFeatures" value="Booking & Scheduling"> Booking & Scheduling<br>
+            <input type="checkbox" name="coreFeatures" value="Client Reviews & Ratings"> Client Reviews & Ratings<br>
+            <input type="checkbox" name="coreFeatures" value="Mental Health Resources/Blog"> Mental Health Resources/Blog<br>
+            <input type="checkbox" name="coreFeatures" value="Forum/Community Discussions"> Forum/Community Discussions<br>
+            <input type="checkbox" name="coreFeatures" value="Chat/Consultation Integration"> Chat/Consultation Integration<br>
+            <input type="checkbox" name="coreFeatures" value="Payment Integration"> Payment Integration<br>
+            <input type="checkbox" name="coreFeatures" value="Dashboard for Professionals"> Dashboard for Professionals<br>
+            <input type="checkbox" name="coreFeatures" value="Video/Audio Sessions"> Video/Audio Sessions<br>
+            <input type="checkbox" name="coreFeatures" value="Resources Library"> Resources Library<br>
 
-        <h3>Data & Privacy Concerns</h3>
-        <label>Data Security Measures:</label>
-        <input type="checkbox" name="securityMeasures" value="Encryption"> Encryption of User Data<br>
-        <input type="checkbox" name="securityMeasures" value="Two-Factor Authentication"> Two-Factor Authentication<br>
-        <input type="checkbox" name="securityMeasures" value="Compliance"> Data Compliance with PIPEDA and HIPAA<br>
-        <input type="text" name="otherSecurity" placeholder="Other: _____________________________"><br>
+            <h3>Customization Requirements</h3>
+            <label for="customization">User-Specific Customization:</label>
+            <textarea id="customization" name="customization" placeholder="Examples: Personal dashboards, personalized recommendations."></textarea>
 
-        <h3>Mobile Responsiveness</h3>
-        <label>Is a Mobile App Planned?</label>
-        <input type="radio" name="mobileApp" value="Yes"> Yes<br>
-        <input type="radio" name="mobileApp" value="No"> No<br>
-        <input type="radio" name="mobileApp" value="Future Consideration"> Future Consideration<br>
+            <label for="contentManagement">Content Management:</label>
+            <textarea id="contentManagement" name="contentManagement" placeholder="How should the site handle content updates?"></textarea>
 
-        <label for="mobileFeatures">Mobile-Friendly Website Features:</label>
-        <textarea id="mobileFeatures" name="mobileFeatures" placeholder="List specific features or designs for mobile users."></textarea>
+            <h3>Data & Privacy Concerns</h3>
+            <label>Data Security Measures:</label>
+            <input type="checkbox" name="securityMeasures" value="Encryption"> Encryption of User Data<br>
+            <input type="checkbox" name="securityMeasures" value="Two-Factor Authentication"> Two-Factor Authentication<br>
+            <input type="checkbox" name="securityMeasures" value="Compliance"> Data Compliance with PIPEDA and HIPAA<br>
+            <input type="text" name="otherSecurity" placeholder="Other: _____________________________"><br>
 
-        <!-- Section 4: Marketing & Launch Strategy -->
-        <h2>Section 4: Marketing & Launch Strategy</h2>
+            <h3>Mobile Responsiveness</h3>
+            <label>Is a Mobile App Planned?</label>
+            <input type="radio" name="mobileApp" value="Yes"> Yes<br>
+            <input type="radio" name="mobileApp" value="No"> No<br>
+            <input type="radio" name="mobileApp" value="Future Consideration"> Future Consideration<br>
 
-        <h3>Key Marketing Message</h3>
-        <label for="brandPromise">Describe the Core Brand Promise in One Sentence:</label>
-        <textarea id="brandPromise" name="brandPromise" placeholder="Example: 'Connecting Canadians to trusted mental health professionals.'"></textarea>
+            <label for="mobileFeatures">Mobile-Friendly Website Features:</label>
+            <textarea id="mobileFeatures" name="mobileFeatures" placeholder="List specific features or designs for mobile users."></textarea>
+        </div>
 
-        <h3>Market Positioning</h3>
-        <label for="differentiation">Differentiation from Competitors:</label>
-        <textarea id="differentiation" name="differentiation" placeholder="Describe the unique selling points of the platform."></textarea>
+        <!-- Section 5: Marketing & Launch Strategy -->
+        <div class="section-container">
+            <h2>Section 5: Marketing & Launch Strategy</h2>
 
-        <label for="competitorAnalysis">Competitor Analysis:</label>
-        <textarea id="competitorAnalysis" name="competitorAnalysis" placeholder="List 3 key competitors and their strengths/weaknesses."></textarea>
+            <h3>Key Marketing Message</h3>
+            <label for="brandPromise">Describe the Core Brand Promise in One Sentence:</label>
+            <textarea id="brandPromise" name="brandPromise" placeholder="Example: 'Connecting Canadians to trusted mental health professionals.'"></textarea>
 
-        <h3>Primary Marketing Channels</h3>
-        <label>Choose Channels:</label>
-        <input type="checkbox" name="channels" value="Google Search (SEO & Ads)"> Google Search (SEO & Ads)<br>
-        <input type="checkbox" name="channels" value="Social Media Marketing"> Social Media Marketing (Specify Platforms: ____________________)<br>
-        <input type="checkbox" name="channels" value="Email Campaigns"> Email Campaigns<br>
-        <input type="checkbox" name="channels" value="Influencer Collaborations"> Influencer Collaborations<br>
-        <input type="checkbox" name="channels" value="Community Events"> Community Events<br>
-        <input type="checkbox" name="channels" value="Partnerships with Universities & Healthcare Institutions"> Partnerships with Universities & Healthcare Institutions<br>
-        <input type="checkbox" name="channels" value="Public Relations (Articles, News Releases)"> Public Relations (Articles, News Releases)<br>
-        <input type="checkbox" name="channels" value="Paid Media (Ads)"> Paid Media (Ads)<br>
+            <h3>Market Positioning</h3>
+            <label for="differentiation">Differentiation from Competitors:</label>
+            <textarea id="differentiation" name="differentiation" placeholder="Describe the unique selling points of the platform."></textarea>
 
-        <h3>Launch Strategy</h3>
-        <label for="launchTarget">Target Audience for Initial Launch:</label>
-        <textarea id="launchTarget" name="launchTarget" placeholder="Examples: Registered therapists, general public, specific age group, etc."></textarea>
+            <label for="competitorAnalysis">Competitor Analysis:</label>
+            <textarea id="competitorAnalysis" name="competitorAnalysis" placeholder="List 3 key competitors and their strengths/weaknesses."></textarea>
 
-        <label for="outreachPlan">Customer Outreach Plan:</label>
-        <textarea id="outreachPlan" name="outreachPlan" placeholder="Methods to attract initial users: Discounts, free consultations, educational events, etc."></textarea>
+            <h3>Primary Marketing Channels</h3>
+            <label>Choose Channels:</label>
+            <input type="checkbox" name="channels" value="Google Search (SEO & Ads)"> Google Search (SEO & Ads)<br>
+            <input type="checkbox" name="channels" value="Social Media Marketing"> Social Media Marketing (Specify Platforms: ____________________)<br>
+            <input type="checkbox" name="channels" value="Email Campaigns"> Email Campaigns<br>
+            <input type="checkbox" name="channels" value="Influencer Collaborations"> Influencer Collaborations<br>
+            <input type="checkbox" name="channels" value="Community Events"> Community Events<br>
+            <input type="checkbox" name="channels" value="Partnerships with Universities & Healthcare Institutions"> Partnerships with Universities & Healthcare Institutions<br>
+            <input type="checkbox" name="channels" value="Public Relations (Articles, News Releases)"> Public Relations (Articles, News Releases)<br>
+            <input type="checkbox" name="channels" value="Paid Media (Ads)"> Paid Media (Ads)<br>
 
-        <h3>Brand Awareness Campaign</h3>
-        <label for="keyMessages">Key Messages for Awareness Campaign:</label>
-        <textarea id="keyMessages" name="keyMessages" placeholder="Examples: Empowering mental health, easy access to therapy."></textarea>
+            <h3>Launch Strategy</h3>
+            <label for="launchTarget">Target Audience for Initial Launch:</label>
+            <textarea id="launchTarget" name="launchTarget" placeholder="Examples: Registered therapists, general public, specific age group, etc."></textarea>
 
-        <label for="socialContent">Social Media Content Ideas:</label>
-        <textarea id="socialContent" name="socialContent" placeholder="Examples: Therapist interviews, mental health facts, user testimonials."></textarea>
+            <label for="outreachPlan">Customer Outreach Plan:</label>
+            <textarea id="outreachPlan" name="outreachPlan" placeholder="Methods to attract initial users: Discounts, free consultations, educational events, etc."></textarea>
 
-        <!-- Section 5: Stakeholder Concerns & Success Metrics -->
-        <h2>Section 5: Stakeholder Concerns & Success Metrics</h2>
+            <h3>Brand Awareness Campaign</h3>
+            <label for="keyMessages">Key Messages for Awareness Campaign:</label>
+            <textarea id="keyMessages" name="keyMessages" placeholder="Examples: Empowering mental health, easy access to therapy."></textarea>
 
-        <h3>Main Concerns</h3>
-        <label for="concerns">Key Challenges to Address:</label>
-        <textarea id="concerns" name="concerns" placeholder="Examples: Data security, legal compliance, scalability, adoption rate, etc."></textarea>
+            <label for="socialContent">Social Media Content Ideas:</label>
+            <textarea id="socialContent" name="socialContent" placeholder="Examples: Therapist interviews, mental health facts, user testimonials."></textarea>
+        </div>
 
-        <h3>Success Metrics</h3>
-        <label for="metrics">List Key Metrics for Success Evaluation:</label>
-        <textarea id="metrics" name="metrics" placeholder="Examples: Number of registered therapists, monthly users, booking conversions, etc."></textarea>
+        <!-- Section 6: Stakeholder Concerns & Success Metrics -->
+        <div class="section-container">
+            <h2>Section 6: Stakeholder Concerns & Success Metrics</h2>
 
-        <h3>Long-Term Vision</h3>
-        <label for="futureFeatures">Future Features or Enhancements:</label>
-        <textarea id="futureFeatures" name="futureFeatures" placeholder="Examples: AI recommendations, international expansion, integration with other health services, etc."></textarea>
+            <h3>Main Concerns</h3>
+            <label for="concerns">Key Challenges to Address:</label>
+            <textarea id="concerns" name="concerns" placeholder="Examples: Data security, legal compliance, scalability, adoption rate, etc."></textarea>
 
-        <!-- Section 6: Additional Notes & Suggestions -->
-        <h2>Section 6: Additional Notes & Suggestions</h2>
+            <h3>Success Metrics</h3>
+            <label for="metrics">List Key Metrics for Success Evaluation:</label>
+            <textarea id="metrics" name="metrics" placeholder="Examples: Number of registered therapists, monthly users, booking conversions, etc."></textarea>
 
-        <label for="additionalNotes">Any Other Considerations:</label>
-        <textarea id="additionalNotes" name="additionalNotes" placeholder="Provide any additional ideas, preferences, or specific concerns not covered above."></textarea>
+            <h3>Long-Term Vision</h3>
+            <label for="futureFeatures">Future Features or Enhancements:</label>
+            <textarea id="futureFeatures" name="futureFeatures" placeholder="Examples: AI recommendations, international expansion, integration with other health services, etc."></textarea>
+        </div>
+
+        <!-- Section 7: Additional Notes & Suggestions -->
+        <div class="section-container">
+            <h2>Section 7: Additional Notes & Suggestions</h2>
+
+            <label for="additionalNotes">Any Other Considerations:</label>
+            <textarea id="additionalNotes" name="additionalNotes" placeholder="Provide any additional ideas, preferences, or specific concerns not covered above."></textarea>
+        </div>
 
         <!-- Submit Button -->
         <button type="submit">Submit</button>

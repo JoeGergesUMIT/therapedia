@@ -8,7 +8,7 @@ function generatePDF() {
     pdf.text("Stakeholder Brainstorming Form", 10, 10);
 
     // Fetch all form elements from the HTML
-    const formElements = document.getElementById("stakeholderForm").elements;
+    const formElements = document.getElementById("index").elements;
 
     let y = 20; // Initial vertical offset for text in PDF
 

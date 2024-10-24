@@ -1,15 +1,11 @@
+<!DOCTYPE html>
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <title>Stakeholder Brainstorming Form</title>
-    <!-- Include Google Fonts for better typography -->
     <link href="https://fonts.googleapis.com/css?family=Open+Sans:400,600,700" rel="stylesheet">
-    <!-- Include Font Awesome for icons (optional) -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" integrity="sha512-..." crossorigin="anonymous" referrerpolicy="no-referrer" />
-    <!-- Include EmailJS SDK -->
-<script src="formSubmission.js"></script>
-
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.4.0/jspdf.umd.min.js"></script>
     <style>
-        /* Enhanced CSS Styling */
         body {
             font-family: 'Open Sans', sans-serif;
             background-color: #f2f6fc;
@@ -56,7 +52,6 @@
         }
 
         input[type="text"],
-        input[type="email"],
         textarea,
         select {
             font-family: 'Open Sans', sans-serif;
@@ -71,13 +66,9 @@
             color: #333;
         }
 
-        input[type="text"]:focus,
-        input[type="email"]:focus,
-        textarea:focus,
-        select:focus {
-            border-color: #1a73e8;
-            outline: none;
-            background-color: #fff;
+        textarea {
+            resize: vertical;
+            min-height: 100px;
         }
 
         input[type="checkbox"],
@@ -86,12 +77,7 @@
             transform: scale(1.2);
         }
 
-        textarea {
-            resize: vertical;
-            min-height: 100px;
-        }
-
-        button[type="submit"] {
+        button[type="button"] {
             display: block;
             width: 100%;
             padding: 15px;
@@ -101,58 +87,13 @@
             border-radius: 8px;
             font-size: 20px;
             cursor: pointer;
-            margin-top: 30px;
+            margin-top: 20px;
             font-weight: 700;
             transition: background 0.3s ease;
         }
 
-        button[type="submit"]:hover {
+        button[type="button"]:hover {
             background-color: #1669c1;
-        }
-
-        .section-container {
-            margin-bottom: 50px;
-        }
-
-        .hint {
-            font-size: 0.9em;
-            color: #666;
-        }
-
-        .form-group {
-            margin-bottom: 25px;
-        }
-
-        .checkbox-group label,
-        .radio-group label {
-            display: inline-block;
-            margin-right: 15px;
-            font-weight: normal;
-        }
-
-        .checkbox-group input[type="text"],
-        .radio-group input[type="text"] {
-            width: auto;
-            display: inline-block;
-            margin-left: 10px;
-        }
-
-        @media (max-width: 768px) {
-            .container {
-                padding: 20px;
-            }
-
-            h1 {
-                font-size: 28px;
-            }
-
-            h2 {
-                font-size: 24px;
-            }
-
-            h3 {
-                font-size: 20px;
-            }
         }
     </style>
 </head>
@@ -165,141 +106,103 @@
                 <h2>Section 1: Branding & Identity</h2>
 
                 <h3>Brand Name & Tagline</h3>
-                <div class="form-group">
-                    <label for="proposedName">Proposed Brand Name:</label>
-                    <input type="text" id="proposedName" name="proposedName" required>
-                </div>
+                <label for="proposedName">Proposed Brand Name:</label>
+                <input type="text" id="proposedName" name="proposedName">
 
-                <div class="form-group">
-                    <label for="tagline">Tagline Ideas:</label>
-                    <textarea id="tagline" name="tagline" placeholder="Example: 'Your Path to Better Mental Health'"></textarea>
-                </div>
+                <label for="tagline">Tagline Ideas:</label>
+                <textarea id="tagline" name="tagline" placeholder="Example: 'Your Path to Better Mental Health'"></textarea>
 
-                <div class="form-group">
-                    <label for="reason">Reason for Choosing the Brand Name:</label>
-                    <textarea id="reason" name="reason" placeholder="Describe why this name is suitable for the brand."></textarea>
-                </div>
+                <label for="reason">Reason for Choosing the Brand Name:</label>
+                <textarea id="reason" name="reason" placeholder="Describe why this name is suitable for the brand."></textarea>
 
                 <h3>Brand Values</h3>
-                <div class="form-group checkbox-group">
-                    <label>Top 5 Core Values to Emphasize:</label><br>
-                    <label><input type="checkbox" name="values" value="Trustworthy"> Trustworthy</label>
-                    <label><input type="checkbox" name="values" value="Compassionate"> Compassionate</label>
-                    <label><input type="checkbox" name="values" value="Innovative"> Innovative</label>
-                    <label><input type="checkbox" name="values" value="Comprehensive"> Comprehensive</label>
-                    <label><input type="checkbox" name="values" value="Professional"> Professional</label>
-                    <label><input type="checkbox" name="values" value="Supportive"> Supportive</label>
-                    <label><input type="checkbox" name="values" value="Inclusive"> Inclusive</label>
-                    <label><input type="checkbox" name="values" value="User-Friendly"> User-Friendly</label>
-                    <input type="text" name="otherValues" placeholder="Other:">
-                </div>
+                <label>Top 5 Core Values to Emphasize:</label>
+                <label><input type="checkbox" name="values" value="Trustworthy"> Trustworthy</label>
+                <label><input type="checkbox" name="values" value="Compassionate"> Compassionate</label>
+                <label><input type="checkbox" name="values" value="Innovative"> Innovative</label>
+                <label><input type="checkbox" name="values" value="Comprehensive"> Comprehensive</label>
+                <label><input type="checkbox" name="values" value="Professional"> Professional</label>
+                <label><input type="checkbox" name="values" value="Supportive"> Supportive</label>
+                <label><input type="checkbox" name="values" value="Inclusive"> Inclusive</label>
+                <label><input type="checkbox" name="values" value="User-Friendly"> User-Friendly</label>
+                <input type="text" name="otherValues" placeholder="Other: _____________________________">
 
                 <h3>Audience Definition</h3>
-                <div class="form-group">
-                    <label for="audience">Primary Audience:</label>
-                    <textarea id="audience" name="audience" placeholder="Examples: Mental health professionals, patients, caregivers, etc."></textarea>
-                </div>
+                <label for="audience">Primary Audience:</label>
+                <textarea id="audience" name="audience" placeholder="Examples: Mental health professionals, patients, caregivers, etc."></textarea>
 
-                <div class="form-group">
-                    <label for="demographics">Demographics:</label>
-                    <textarea id="demographics" name="demographics" placeholder="Specify key audience attributes: Age range, gender, income, location, etc."></textarea>
-                </div>
+                <label for="demographics">Demographics:</label>
+                <textarea id="demographics" name="demographics" placeholder="Specify key audience attributes: Age range, gender, income, location, etc."></textarea>
 
-                <div class="form-group">
-                    <label for="painPoints">Audience Pain Points:</label>
-                    <textarea id="painPoints" name="painPoints" placeholder="Examples: Difficulty finding therapists, lack of trustworthy information, etc."></textarea>
-                </div>
+                <label for="painPoints">Audience Pain Points:</label>
+                <textarea id="painPoints" name="painPoints" placeholder="Examples: Difficulty finding therapists, lack of trustworthy information, etc."></textarea>
 
                 <h3>Brand Voice</h3>
-                <div class="form-group">
-                    <label for="brandVoice">How Should the Brand Communicate?</label>
-                    <textarea id="brandVoice" name="brandVoice" placeholder="Examples: Warm, professional, knowledgeable, supportive, etc."></textarea>
-                </div>
+                <label for="brandVoice">How Should the Brand Communicate?</label>
+                <textarea id="brandVoice" name="brandVoice" placeholder="Examples: Warm, professional, knowledgeable, supportive, etc."></textarea>
 
-                <div class="form-group">
-                    <label for="sampleMessaging">Sample Messaging:</label>
-                    <textarea id="sampleMessaging" name="sampleMessaging" placeholder="Provide an example message or tone for the brand."></textarea>
-                </div>
+                <label for="sampleMessaging">Sample Messaging:</label>
+                <textarea id="sampleMessaging" name="sampleMessaging" placeholder="Provide an example message or tone for the brand."></textarea>
             </div>
 
             <!-- Section 2: Platform Pages -->
             <div class="section-container">
                 <h2>Section 2: Platform Pages</h2>
                 <h3>Suggested Platform Pages</h3>
-                <div class="form-group checkbox-group">
-                    <label>Which pages should be included on the platform?</label><br>
-                    <label><input type="checkbox" name="pages" value="Home Page"> Home Page (Introduction, Key Features, Highlights)</label><br>
-                    <label><input type="checkbox" name="pages" value="About Us"> About Us (Mission, Vision, Values, Team)</label><br>
-                    <label><input type="checkbox" name="pages" value="Services"> Services (List of services offered, descriptions, specialties)</label><br>
-                    <label><input type="checkbox" name="pages" value="Find a Therapist"> Find a Therapist (Search filters, directory of professionals)</label><br>
-                    <label><input type="checkbox" name="pages" value="Blog"> Blog (Articles, insights, expert opinions)</label><br>
-                    <label><input type="checkbox" name="pages" value="Resources"> Resources (Books, case studies, e-books, helpful links)</label><br>
-                    <label><input type="checkbox" name="pages" value="Contact"> Contact (Contact form, phone number, address)</label><br>
-                    <label><input type="checkbox" name="pages" value="FAQ"> FAQ (Common questions, platform guidelines)</label><br>
-                    <label><input type="checkbox" name="pages" value="Support"> Support (Technical help, report an issue)</label><br>
-                    <label><input type="checkbox" name="pages" value="Testimonials"> Testimonials (Client and therapist feedback)</label><br>
-                    <label><input type="checkbox" name="pages" value="Legal & Privacy"> Legal & Privacy (Privacy policy, terms of service)</label><br>
-                    <input type="text" name="otherPages" placeholder="Other: _____________________________">
-                </div>
+                <label>Which pages should be included on the platform?</label>
+                <label><input type="checkbox" name="pages" value="Home Page"> Home Page (Introduction, Key Features, Highlights)</label>
+                <label><input type="checkbox" name="pages" value="About Us"> About Us (Mission, Vision, Values, Team)</label>
+                <label><input type="checkbox" name="pages" value="Services"> Services (List of services offered, descriptions, specialties)</label>
+                <label><input type="checkbox" name="pages" value="Find a Therapist"> Find a Therapist (Search filters, directory of professionals)</label>
+                <label><input type="checkbox" name="pages" value="Blog"> Blog (Articles, insights, expert opinions)</label>
+                <label><input type="checkbox" name="pages" value="Resources"> Resources (Books, case studies, e-books, helpful links)</label>
+                <label><input type="checkbox" name="pages" value="Contact"> Contact (Contact form, phone number, address)</label>
+                <label><input type="checkbox" name="pages" value="FAQ"> FAQ (Common questions, platform guidelines)</label>
+                <label><input type="checkbox" name="pages" value="Support"> Support (Technical help, report an issue)</label>
+                <label><input type="checkbox" name="pages" value="Testimonials"> Testimonials (Client and therapist feedback)</label>
+                <label><input type="checkbox" name="pages" value="Legal & Privacy"> Legal & Privacy (Privacy policy, terms of service)</label>
+                <input type="text" name="otherPages" placeholder="Other: _____________________________">
             </div>
 
             <!-- Section 3: Website Design & Aesthetics -->
             <div class="section-container">
                 <h2>Section 3: Website Design & Aesthetics</h2>
                 <h3>Visual Style</h3>
-                <div class="form-group checkbox-group">
-                    <label>Design Approach:</label><br>
-                    <label><input type="checkbox" name="designStyle" value="Minimalistic"> Minimalistic</label>
-                    <label><input type="checkbox" name="designStyle" value="Modern"> Modern</label>
-                    <label><input type="checkbox" name="designStyle" value="Classic"> Classic</label>
-                    <label><input type="checkbox" name="designStyle" value="Bold & Colorful"> Bold & Colorful</label>
-                    <label><input type="checkbox" name="designStyle" value="Clean & Professional"> Clean & Professional</label>
-                    <label><input type="checkbox" name="designStyle" value="Accessible & User-Friendly"> Accessible & User-Friendly</label>
-                </div>
+                <label>Design Approach:</label>
+                <label><input type="checkbox" name="designStyle" value="Minimalistic"> Minimalistic</label>
+                <label><input type="checkbox" name="designStyle" value="Modern"> Modern</label>
+                <label><input type="checkbox" name="designStyle" value="Classic"> Classic</label>
+                <label><input type="checkbox" name="designStyle" value="Bold & Colorful"> Bold & Colorful</label>
+                <label><input type="checkbox" name="designStyle" value="Clean & Professional"> Clean & Professional</label>
+                <label><input type="checkbox" name="designStyle" value="Accessible & User-Friendly"> Accessible & User-Friendly</label>
 
-                <div class="form-group">
-                    <label for="colors">Preferred Color Palette:</label>
-                    <input type="text" id="colors" name="colors">
-                </div>
+                <label for="colors">Preferred Color Palette:</label>
+                <input type="text" id="colors" name="colors">
 
-                <div class="form-group">
-                    <label for="colorMeaning">Color Meaning/Significance:</label>
-                    <textarea id="colorMeaning" name="colorMeaning" placeholder="Describe why these colors represent the brand."></textarea>
-                </div>
+                <label for="colorMeaning">Color Meaning/Significance:</label>
+                <textarea id="colorMeaning" name="colorMeaning" placeholder="Describe why these colors represent the brand."></textarea>
 
                 <h3>Typography Preferences</h3>
-                <div class="form-group">
-                    <label for="fontStyle">Font Style:</label>
-                    <input type="text" id="fontStyle" name="fontStyle" placeholder="Examples: Sans-serif, serif, handwritten, etc.">
-                </div>
+                <label for="fontStyle">Font Style:</label>
+                <input type="text" id="fontStyle" name="fontStyle" placeholder="Examples: Sans-serif, serif, handwritten, etc.">
 
-                <div class="form-group">
-                    <label for="fontUsage">Font Usage:</label>
-                    <textarea id="fontUsage" name="fontUsage" placeholder="Primary heading font and body text font."></textarea>
-                </div>
+                <label for="fontUsage">Font Usage:</label>
+                <textarea id="fontUsage" name="fontUsage" placeholder="Primary heading font and body text font."></textarea>
 
                 <h3>Visual Inspiration</h3>
-                <div class="form-group">
-                    <label for="inspiration">List 3 Websites or Brands for Inspiration:</label>
-                    <textarea id="inspiration" name="inspiration" placeholder="______________________ (Reason: ____________________)"></textarea>
-                </div>
+                <label for="inspiration">List 3 Websites or Brands for Inspiration:</label>
+                <textarea id="inspiration" name="inspiration" placeholder="______________________ (Reason: ____________________)"></textarea>
 
                 <h3>Mood & Imagery</h3>
-                <div class="form-group">
-                    <label for="imagery">Preferred Style of Imagery:</label>
-                    <textarea id="imagery" name="imagery" placeholder="Examples: Real-life photography, illustrations, abstract images, icons, etc."></textarea>
-                </div>
+                <label for="imagery">Preferred Style of Imagery:</label>
+                <textarea id="imagery" name="imagery" placeholder="Examples: Real-life photography, illustrations, abstract images, icons, etc."></textarea>
 
-                <div class="form-group">
-                    <label for="moodKeywords">Mood Keywords:</label>
-                    <textarea id="moodKeywords" name="moodKeywords" placeholder="Examples: Trust, warmth, openness, clarity, energy, calm."></textarea>
-                </div>
+                <label for="moodKeywords">Mood Keywords:</label>
+                <textarea id="moodKeywords" name="moodKeywords" placeholder="Examples: Trust, warmth, openness, clarity, energy, calm."></textarea>
 
                 <h3>Additional Design Guidelines</h3>
-                <div class="form-group">
-                    <label for="designGuidelines">Describe any specific elements to include or avoid:</label>
-                    <textarea id="designGuidelines" name="designGuidelines"></textarea>
-                </div>
+                <label for="designGuidelines">Describe any specific elements to include or avoid:</label>
+                <textarea id="designGuidelines" name="designGuidelines"></textarea>
             </div>
 
             <!-- Section 4: Functional & Technical Requirements -->
@@ -307,52 +210,40 @@
                 <h2>Section 4: Functional & Technical Requirements</h2>
 
                 <h3>Core Features</h3>
-                <div class="form-group checkbox-group">
-                    <label>Key Functionalities to Include:</label><br>
-                    <label><input type="checkbox" name="coreFeatures" value="Therapist Index & Search"> Therapist Index & Search</label>
-                    <label><input type="checkbox" name="coreFeatures" value="Booking & Scheduling"> Booking & Scheduling</label>
-                    <label><input type="checkbox" name="coreFeatures" value="Client Reviews & Ratings"> Client Reviews & Ratings</label>
-                    <label><input type="checkbox" name="coreFeatures" value="Mental Health Resources/Blog"> Mental Health Resources/Blog</label>
-                    <label><input type="checkbox" name="coreFeatures" value="Forum/Community Discussions"> Forum/Community Discussions</label>
-                    <label><input type="checkbox" name="coreFeatures" value="Chat/Consultation Integration"> Chat/Consultation Integration</label>
-                    <label><input type="checkbox" name="coreFeatures" value="Payment Integration"> Payment Integration</label>
-                    <label><input type="checkbox" name="coreFeatures" value="Dashboard for Professionals"> Dashboard for Professionals</label>
-                    <label><input type="checkbox" name="coreFeatures" value="Video/Audio Sessions"> Video/Audio Sessions</label>
-                    <label><input type="checkbox" name="coreFeatures" value="Resources Library"> Resources Library</label>
-                </div>
+                <label>Key Functionalities to Include:</label>
+                <label><input type="checkbox" name="coreFeatures" value="Therapist Index & Search"> Therapist Index & Search</label>
+                <label><input type="checkbox" name="coreFeatures" value="Booking & Scheduling"> Booking & Scheduling</label>
+                <label><input type="checkbox" name="coreFeatures" value="Client Reviews & Ratings"> Client Reviews & Ratings</label>
+                <label><input type="checkbox" name="coreFeatures" value="Mental Health Resources/Blog"> Mental Health Resources/Blog</label>
+                <label><input type="checkbox" name="coreFeatures" value="Forum/Community Discussions"> Forum/Community Discussions</label>
+                <label><input type="checkbox" name="coreFeatures" value="Chat/Consultation Integration"> Chat/Consultation Integration</label>
+                <label><input type="checkbox" name="coreFeatures" value="Payment Integration"> Payment Integration</label>
+                <label><input type="checkbox" name="coreFeatures" value="Dashboard for Professionals"> Dashboard for Professionals</label>
+                <label><input type="checkbox" name="coreFeatures" value="Video/Audio Sessions"> Video/Audio Sessions</label>
+                <label><input type="checkbox" name="coreFeatures" value="Resources Library"> Resources Library</label>
 
                 <h3>Customization Requirements</h3>
-                <div class="form-group">
-                    <label for="customization">User-Specific Customization:</label>
-                    <textarea id="customization" name="customization" placeholder="Examples: Personal dashboards, personalized recommendations."></textarea>
-                </div>
+                <label for="customization">User-Specific Customization:</label>
+                <textarea id="customization" name="customization" placeholder="Examples: Personal dashboards, personalized recommendations."></textarea>
 
-                <div class="form-group">
-                    <label for="contentManagement">Content Management:</label>
-                    <textarea id="contentManagement" name="contentManagement" placeholder="How should the site handle content updates?"></textarea>
-                </div>
+                <label for="contentManagement">Content Management:</label>
+                <textarea id="contentManagement" name="contentManagement" placeholder="How should the site handle content updates?"></textarea>
 
                 <h3>Data & Privacy Concerns</h3>
-                <div class="form-group checkbox-group">
-                    <label>Data Security Measures:</label><br>
-                    <label><input type="checkbox" name="securityMeasures" value="Encryption"> Encryption of User Data</label>
-                    <label><input type="checkbox" name="securityMeasures" value="Two-Factor Authentication"> Two-Factor Authentication</label>
-                    <label><input type="checkbox" name="securityMeasures" value="Compliance"> Data Compliance with PIPEDA and HIPAA</label>
-                    <input type="text" name="otherSecurity" placeholder="Other: _____________________________">
-                </div>
+                <label>Data Security Measures:</label>
+                <label><input type="checkbox" name="securityMeasures" value="Encryption"> Encryption of User Data</label>
+                <label><input type="checkbox" name="securityMeasures" value="Two-Factor Authentication"> Two-Factor Authentication</label>
+                <label><input type="checkbox" name="securityMeasures" value="Compliance"> Data Compliance with PIPEDA and HIPAA</label>
+                <input type="text" name="otherSecurity" placeholder="Other: _____________________________">
 
                 <h3>Mobile Responsiveness</h3>
-                <div class="form-group radio-group">
-                    <label>Is a Mobile App Planned?</label><br>
-                    <label><input type="radio" name="mobileApp" value="Yes"> Yes</label>
-                    <label><input type="radio" name="mobileApp" value="No"> No</label>
-                    <label><input type="radio" name="mobileApp" value="Future Consideration"> Future Consideration</label>
-                </div>
+                <label>Is a Mobile App Planned?</label>
+                <label><input type="radio" name="mobileApp" value="Yes"> Yes</label>
+                <label><input type="radio" name="mobileApp" value="No"> No</label>
+                <label><input type="radio" name="mobileApp" value="Future Consideration"> Future Consideration</label>
 
-                <div class="form-group">
-                    <label for="mobileFeatures">Mobile-Friendly Website Features:</label>
-                    <textarea id="mobileFeatures" name="mobileFeatures" placeholder="List specific features or designs for mobile users."></textarea>
-                </div>
+                <label for="mobileFeatures">Mobile-Friendly Website Features:</label>
+                <textarea id="mobileFeatures" name="mobileFeatures" placeholder="List specific features or designs for mobile users."></textarea>
             </div>
 
             <!-- Section 5: Marketing & Launch Strategy -->
@@ -360,56 +251,40 @@
                 <h2>Section 5: Marketing & Launch Strategy</h2>
 
                 <h3>Key Marketing Message</h3>
-                <div class="form-group">
-                    <label for="brandPromise">Describe the Core Brand Promise in One Sentence:</label>
-                    <textarea id="brandPromise" name="brandPromise" placeholder="Example: 'Connecting Canadians to trusted mental health professionals.'"></textarea>
-                </div>
+                <label for="brandPromise">Describe the Core Brand Promise in One Sentence:</label>
+                <textarea id="brandPromise" name="brandPromise" placeholder="Example: 'Connecting Canadians to trusted mental health professionals.'"></textarea>
 
                 <h3>Market Positioning</h3>
-                <div class="form-group">
-                    <label for="differentiation">Differentiation from Competitors:</label>
-                    <textarea id="differentiation" name="differentiation" placeholder="Describe the unique selling points of the platform."></textarea>
-                </div>
+                <label for="differentiation">Differentiation from Competitors:</label>
+                <textarea id="differentiation" name="differentiation" placeholder="Describe the unique selling points of the platform."></textarea>
 
-                <div class="form-group">
-                    <label for="competitorAnalysis">Competitor Analysis:</label>
-                    <textarea id="competitorAnalysis" name="competitorAnalysis" placeholder="List 3 key competitors and their strengths/weaknesses."></textarea>
-                </div>
+                <label for="competitorAnalysis">Competitor Analysis:</label>
+                <textarea id="competitorAnalysis" name="competitorAnalysis" placeholder="List 3 key competitors and their strengths/weaknesses."></textarea>
 
                 <h3>Primary Marketing Channels</h3>
-                <div class="form-group checkbox-group">
-                    <label>Choose Channels:</label><br>
-                    <label><input type="checkbox" name="channels" value="Google Search (SEO & Ads)"> Google Search (SEO & Ads)</label>
-                    <label><input type="checkbox" name="channels" value="Social Media Marketing"> Social Media Marketing (Specify Platforms: ____________________)</label>
-                    <label><input type="checkbox" name="channels" value="Email Campaigns"> Email Campaigns</label>
-                    <label><input type="checkbox" name="channels" value="Influencer Collaborations"> Influencer Collaborations</label>
-                    <label><input type="checkbox" name="channels" value="Community Events"> Community Events</label>
-                    <label><input type="checkbox" name="channels" value="Partnerships with Universities & Healthcare Institutions"> Partnerships with Universities & Healthcare Institutions</label>
-                    <label><input type="checkbox" name="channels" value="Public Relations (Articles, News Releases)"> Public Relations (Articles, News Releases)</label>
-                    <label><input type="checkbox" name="channels" value="Paid Media (Ads)"> Paid Media (Ads)</label>
-                </div>
+                <label>Choose Channels:</label>
+                <label><input type="checkbox" name="channels" value="Google Search (SEO & Ads)"> Google Search (SEO & Ads)</label>
+                <label><input type="checkbox" name="channels" value="Social Media Marketing"> Social Media Marketing (Specify Platforms: ____________________)</label>
+                <label><input type="checkbox" name="channels" value="Email Campaigns"> Email Campaigns</label>
+                <label><input type="checkbox" name="channels" value="Influencer Collaborations"> Influencer Collaborations</label>
+                <label><input type="checkbox" name="channels" value="Community Events"> Community Events</label>
+                <label><input type="checkbox" name="channels" value="Partnerships with Universities & Healthcare Institutions"> Partnerships with Universities & Healthcare Institutions</label>
+                <label><input type="checkbox" name="channels" value="Public Relations (Articles, News Releases)"> Public Relations (Articles, News Releases)</label>
+                <label><input type="checkbox" name="channels" value="Paid Media (Ads)"> Paid Media (Ads)</label>
 
                 <h3>Launch Strategy</h3>
-                <div class="form-group">
-                    <label for="launchTarget">Target Audience for Initial Launch:</label>
-                    <textarea id="launchTarget" name="launchTarget" placeholder="Examples: Registered therapists, general public, specific age group, etc."></textarea>
-                </div>
+                <label for="launchTarget">Target Audience for Initial Launch:</label>
+                <textarea id="launchTarget" name="launchTarget" placeholder="Examples: Registered therapists, general public, specific age group, etc."></textarea>
 
-                <div class="form-group">
-                    <label for="outreachPlan">Customer Outreach Plan:</label>
-                    <textarea id="outreachPlan" name="outreachPlan" placeholder="Methods to attract initial users: Discounts, free consultations, educational events, etc."></textarea>
-                </div>
+                <label for="outreachPlan">Customer Outreach Plan:</label>
+                <textarea id="outreachPlan" name="outreachPlan" placeholder="Methods to attract initial users: Discounts, free consultations, educational events, etc."></textarea>
 
                 <h3>Brand Awareness Campaign</h3>
-                <div class="form-group">
-                    <label for="keyMessages">Key Messages for Awareness Campaign:</label>
-                    <textarea id="keyMessages" name="keyMessages" placeholder="Examples: Empowering mental health, easy access to therapy."></textarea>
-                </div>
+                <label for="keyMessages">Key Messages for Awareness Campaign:</label>
+                <textarea id="keyMessages" name="keyMessages" placeholder="Examples: Empowering mental health, easy access to therapy."></textarea>
 
-                <div class="form-group">
-                    <label for="socialContent">Social Media Content Ideas:</label>
-                    <textarea id="socialContent" name="socialContent" placeholder="Examples: Therapist interviews, mental health facts, user testimonials."></textarea>
-                </div>
+                <label for="socialContent">Social Media Content Ideas:</label>
+                <textarea id="socialContent" name="socialContent" placeholder="Examples: Therapist interviews, mental health facts, user testimonials."></textarea>
             </div>
 
             <!-- Section 6: Stakeholder Concerns & Success Metrics -->
@@ -417,98 +292,56 @@
                 <h2>Section 6: Stakeholder Concerns & Success Metrics</h2>
 
                 <h3>Main Concerns</h3>
-                <div class="form-group">
-                    <label for="concerns">Key Challenges to Address:</label>
-                    <textarea id="concerns" name="concerns" placeholder="Examples: Data security, legal compliance, scalability, adoption rate, etc."></textarea>
-                </div>
+                <label for="concerns">Key Challenges to Address:</label>
+                <textarea id="concerns" name="concerns" placeholder="Examples: Data security, legal compliance, scalability, adoption rate, etc."></textarea>
 
                 <h3>Success Metrics</h3>
-                <div class="form-group">
-                    <label for="metrics">List Key Metrics for Success Evaluation:</label>
-                    <textarea id="metrics" name="metrics" placeholder="Examples: Number of registered therapists, monthly users, booking conversions, etc."></textarea>
-                </div>
+                <label for="metrics">List Key Metrics for Success Evaluation:</label>
+                <textarea id="metrics" name="metrics" placeholder="Examples: Number of registered therapists, monthly users, booking conversions, etc."></textarea>
 
                 <h3>Long-Term Vision</h3>
-                <div class="form-group">
-                    <label for="futureFeatures">Future Features or Enhancements:</label>
-                    <textarea id="futureFeatures" name="futureFeatures" placeholder="Examples: AI recommendations, international expansion, integration with other health services, etc."></textarea>
-                </div>
+                <label for="futureFeatures">Future Features or Enhancements:</label>
+                <textarea id="futureFeatures" name="futureFeatures" placeholder="Examples: AI recommendations, international expansion, integration with other health services, etc."></textarea>
             </div>
 
             <!-- Section 7: Additional Notes & Suggestions -->
             <div class="section-container">
                 <h2>Section 7: Additional Notes & Suggestions</h2>
-
                 <label for="additionalNotes">Any Other Considerations:</label>
                 <textarea id="additionalNotes" name="additionalNotes" placeholder="Provide any additional ideas, preferences, or specific concerns not covered above."></textarea>
             </div>
 
-            <!-- Submit Button -->
-            <button type="submit">Submit</button>
+            <button type="button" onclick="generatePDF()">Save as PDF</button>
         </form>
     </div>
 
-    <!-- Initialize EmailJS -->
-    <script type="text/javascript">
-        (function(){
-            emailjs.init("service_5zoeqcj"); // Replace 'YOUR_USER_ID' with your actual EmailJS User ID
-        })();
-    </script>
-
     <script>
-        document.getElementById('stakeholderForm').addEventListener('submit', function (e) {
-            e.preventDefault();
+        function generatePDF() {
+            const { jsPDF } = window.jspdf;
+            const pdf = new jsPDF();
 
-            // Collect form data
-            var form = document.getElementById('stakeholderForm');
-            var formData = new FormData(form);
-            var data = {};
-            formData.forEach(function(value, key){
-                // Handle multiple checkbox values
-                if (data[key]) {
-                    if (!Array.isArray(data[key])) {
-                        data[key] = [data[key]];
-                    }
-                    data[key].push(value);
-                } else {
-                    data[key] = value;
+            pdf.setFontSize(16);
+            pdf.text("Stakeholder Brainstorming Form", 10, 10);
+
+            // Fetch all form elements
+            const formElements = document.getElementById("stakeholderForm").elements;
+
+            let y = 20; // Initial vertical offset
+
+            // Iterate over form elements and add their content to the PDF
+            for (let element of formElements) {
+                if (element.type === "checkbox" && element.checked) {
+                    pdf.text(`${element.name}: ${element.value}`, 10, y);
+                    y += 10;
+                } else if (element.type === "text" || element.tagName === "TEXTAREA") {
+                    pdf.text(`${element.labels[0].innerText}: ${element.value}`, 10, y);
+                    y += 10;
                 }
-            });
+            }
 
-            // Send email using EmailJS
-            emailjs.send('service_5zoeqcj', 'template_nnbo1t1', data)
-            .then(function(response) {
-               alert('Form submitted successfully!');
-               form.reset();
-            }, function(error) {
-               alert('An error occurred while submitting the form. Please try again.');
-               console.error('EmailJS Error:', error);
-            });
-        });
-    </script>
-</body>
-</html>
-', data)
-            .then(function(response) {
-               alert('Form submitted successfully!');
-               form.reset();
-            }, function(error) {
-               alert('An error occurred while submitting the form. Please try again.');
-               console.error('EmailJS Error:', error);
-            });
-        });
-    </script>
-</body>
-</html>
-', data)
-            .then(function(response) {
-               alert('Form submitted successfully!');
-               form.reset();
-            }, function(error) {
-               alert('An error occurred while submitting the form. Please try again.');
-               console.error('EmailJS Error:', error);
-            });
-        });
+            // Save the generated PDF
+            pdf.save("Stakeholder_Brainstorming_Form.pdf");
+        }
     </script>
 </body>
 </html>

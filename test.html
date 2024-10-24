@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <title>Basic PDF Test Form</title>
     <!-- Load jsPDF library directly from CDN -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.4.0/jspdf.umd.min.js" defer></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.4.0/jspdf.umd.min.js"></script>
 </head>
 <body>
     <h1>PDF Test Form</h1>
@@ -19,10 +19,10 @@
     </form>
 
     <script>
-        // Ensure jsPDF loads only after the script tag is fully processed
-        document.addEventListener('DOMContentLoaded', function () {
+        window.onload = function () {
+            // Define the generatePDF function only after everything is loaded
             function generatePDF() {
-                // Check if jsPDF is available
+                // Ensure that jsPDF is loaded correctly
                 if (typeof window.jspdf === 'undefined' || !window.jspdf.jsPDF) {
                     alert("jsPDF library not loaded correctly.");
                     return;
@@ -58,7 +58,7 @@
 
             // Attach the function to the global window object to be accessible in inline events
             window.generatePDF = generatePDF;
-        });
+        };
     </script>
 </body>
 </html>

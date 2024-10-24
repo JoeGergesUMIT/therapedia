@@ -6,6 +6,9 @@
     <!-- Load jsPDF library directly from CDN -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.4.0/jspdf.umd.min.js"></script>
     <link href="https://fonts.googleapis.com/css?family=Open+Sans:400,600,700" rel="stylesheet">
+    <!-- Include html2pdf.js library -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
+
     <style>
         body {
             font-family: 'Open Sans', sans-serif;
@@ -316,44 +319,25 @@
     <script>
         window.onload = function () {
             // Define the generatePDF function only after everything is loaded
-            function generatePDF() {
-                // Ensure that jsPDF is loaded correctly
-                if (typeof window.jspdf === 'undefined' || !window.jspdf.jsPDF) {
-                    alert("jsPDF library not loaded correctly.");
-                    return;
-                }
+                   function generatePDF() {
+            // Select the element you want to render
+            const element = document.querySelector('.container');
 
-                // Initialize jsPDF
-                const { jsPDF } = window.jspdf;
-                const pdf = new jsPDF();
+            // Define options
+            const opt = {
+                margin:       [0.5, 0.5, 0.5, 0.5],
+                filename:     'Therapedia_Brainstorming.pdf',
+                image:        { type: 'jpeg', quality: 0.98 },
+                html2canvas:  { scale: 2, useCORS: true },
+                jsPDF:        { unit: 'in', format: 'letter', orientation: 'portrait' }
+            };
 
-                pdf.setFontSize(16);
-                pdf.text("Basic PDF Test Form", 10, 10);
-
-                // Fetch all form elements
-                const formElements = document.getElementById("index").elements;
-
-                let y = 20; // Initial vertical offset
-
-                // Iterate over form elements and add their content to the PDF
-                for (let element of formElements) {
-                    if (element.type === "checkbox" && element.checked) {
-                        pdf.text(`${element.name}: ${element.value}`, 10, y);
-                        y += 10;
-                    } else if ((element.type === "text" || element.tagName === "TEXTAREA") && element.value) {
-                        const label = element.labels ? element.labels[0].innerText : element.name;
-                        pdf.text(`${label}: ${element.value}`, 10, y);
-                        y += 10;
-                    }
-                }
-
-                // Save the generated PDF
-                pdf.save("Therapedia_Brainstorming.pdf");
-            }
-
-            // Attach the function to the global window object to be accessible in inline events
-            window.generatePDF = generatePDF;
-        };
+            // Generate the PDF
+            html2pdf().from(element).set(opt).save();
+        }
     </script>
 </body>
 </html>
+
+
+               

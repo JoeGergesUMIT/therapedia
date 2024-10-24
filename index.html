@@ -316,15 +316,50 @@
         </form>
     </div>
 
-     <button type="button" onclick="generatePDF()">Save as PDF</button>
-        </form>
-    </div>
+    <button type="button" onclick="generatePDF()">Save as PDF</button>
+    </form>
 
-                   <button type="button" onclick="generatePDF()">Save as PDF</button>
-        </form>
-    </div>
+    <script>
+        window.onload = function () {
+            // Define the generatePDF function only after everything is loaded
+            function generatePDF() {
+                // Ensure that jsPDF is loaded correctly
+                if (typeof window.jspdf === 'undefined' || !window.jspdf.jsPDF) {
+                    alert("jsPDF library not loaded correctly.");
+                    return;
+                }
 
-    <!-- Link to the external JavaScript file -->
-    <script src="filesubmission.js"></script>
+                // Initialize jsPDF
+                const { jsPDF } = window.jspdf;
+                const pdf = new jsPDF();
+
+                pdf.setFontSize(16);
+                pdf.text("Basic PDF Test Form", 10, 10);
+
+                // Fetch all form elements
+                const formElements = document.getElementById("index").elements;
+
+                let y = 20; // Initial vertical offset
+
+                // Iterate over form elements and add their content to the PDF
+                for (let element of formElements) {
+                    if (element.type === "checkbox" && element.checked) {
+                        pdf.text(`${element.name}: ${element.value}`, 10, y);
+                        y += 10;
+                    } else if ((element.type === "text" || element.tagName === "TEXTAREA") && element.value) {
+                        const label = element.labels ? element.labels[0].innerText : element.name;
+                        pdf.text(`${label}: ${element.value}`, 10, y);
+                        y += 10;
+                    }
+                }
+
+                // Save the generated PDF
+                pdf.save("Test_Form.pdf");
+            }
+
+            // Attach the function to the global window object to be accessible in inline events
+            window.generatePDF = generatePDF;
+        };
+    </script>
 </body>
 </html>

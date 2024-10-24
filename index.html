@@ -315,11 +315,21 @@
         </form>
     </div>
 
-    <!-- Include external JavaScript file -->
-    <script src="formSubmission.js"></script>
-
     <script>
         function generatePDF() {
+            // Ensure that the form with ID "index" exists
+            const form = document.getElementById("index");
+            if (!form) {
+                alert("Form not found. Please check the form ID.");
+                return;
+            }
+
+            // Check if jsPDF is loaded correctly
+            if (typeof jsPDF === 'undefined') {
+                alert("jsPDF library not loaded correctly.");
+                return;
+            }
+
             const { jsPDF } = window.jspdf;
             const pdf = new jsPDF();
 
@@ -327,7 +337,7 @@
             pdf.text("Stakeholder Brainstorming Form", 10, 10);
 
             // Fetch all form elements
-            const formElements = document.getElementById("index").elements;
+            const formElements = form.elements;
 
             let y = 20; // Initial vertical offset
 

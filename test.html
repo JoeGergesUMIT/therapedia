@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Basic PDF Test Form</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.4.0/jspdf.umd.min.js"></script>
+</head>
+<body>
+    <h1>PDF Test Form</h1>
+    <form id="index">
+        <label for="proposedName">Proposed Brand Name:</label>
+        <input type="text" id="proposedName" name="proposedName" placeholder="Enter name"><br><br>
+
+        <label for="tagline">Tagline Ideas:</label>
+        <textarea id="tagline" name="tagline" placeholder="Example: 'Your Path to Better Mental Health'"></textarea><br><br>
+
+        <button type="button" onclick="generatePDF()">Save as PDF</button>
+    </form>
+
+    <script>
+        function generatePDF() {
+            // Ensure that the form with ID "index" exists
+            const form = document.getElementById("index");
+            if (!form) {
+                alert("Form not found. Please check the form ID.");
+                return;
+            }
+
+            // Check if jsPDF is loaded correctly
+            if (typeof jsPDF === 'undefined') {
+                alert("jsPDF library not loaded correctly.");
+                return;
+            }
+
+            const { jsPDF } = window.jspdf;
+            const pdf = new jsPDF();
+
+            pdf.setFontSize(16);
+            pdf.text("Basic PDF Test Form", 10, 10);
+
+            // Fetch all form elements
+            const formElements = form.elements;
+
+            let y = 20; // Initial vertical offset
+
+            // Iterate over form elements and add their content to the PDF
+            for (let element of formElements) {
+                if (element.type === "checkbox" && element.checked) {
+                    pdf.text(`${element.name}: ${element.value}`, 10, y);
+                    y += 10;
+                } else if ((element.type === "text" || element.tagName === "TEXTAREA") && element.value) {
+                    const label = element.labels ? element.labels[0].innerText : element.name;
+                    pdf.text(`${label}: ${element.value}`, 10, y);
+                    y += 10;
+                } else if (element.type === "radio" && element.checked) {
+                    pdf.text(`${element.name}: ${element.value}`, 10, y);
+                    y += 10;
+                }
+            }
+
+            // Save the generated PDF
+            pdf.save("Test_Form.pdf");
+        }
+    </script>
+</body>
+</html>

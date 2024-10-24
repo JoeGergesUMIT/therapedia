@@ -316,10 +316,21 @@
         </form>
     </div>
 
+     <button type="button" onclick="generatePDF()">Save as PDF</button>
+        </form>
+    </div>
+
     <script>
         window.onload = function () {
             // Define the generatePDF function only after everything is loaded
             function generatePDF() {
+                // Find the form with ID "index"
+                const form = document.getElementById("index");
+                if (!form) {
+                    alert("Form not found. Please check the form ID.");
+                    return;
+                }
+
                 // Ensure that jsPDF is loaded correctly
                 if (typeof window.jspdf === 'undefined' || !window.jspdf.jsPDF) {
                     alert("jsPDF library not loaded correctly.");
@@ -334,7 +345,7 @@
                 pdf.text("Stakeholder Brainstorming Form", 10, 10);
 
                 // Fetch all form elements
-                const formElements = document.getElementById("index").elements;
+                const formElements = form.elements;
 
                 let y = 20; // Initial vertical offset
 

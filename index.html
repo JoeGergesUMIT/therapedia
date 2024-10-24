@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Website Stakeholder Brainstorming Form</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container">
+        <h1>Website Stakeholder Brainstorming Form</h1>
+        <form id="stakeholderForm">
+            <!-- Section 1: Core Feature Selection -->
+            <h2>Section 1: Core Feature Selection</h2>
+            
+            <h3>1. Therapist Directory</h3>
+            <label>Include therapist directory?</label>
+            <input type="checkbox" name="therapistDirectory" value="Yes"> Yes<br>
+            
+            <label>Search Filters:</label><br>
+            <input type="checkbox" name="filters" value="Location"> Location<br>
+            <input type="checkbox" name="filters" value="Specializations"> Specializations<br>
+            <input type="checkbox" name="filters" value="Insurance"> Insurance<br>
+            <input type="checkbox" name="filters" value="Therapy Type"> Therapy Type<br>
+            <input type="checkbox" name="filters" value="Gender of Therapist"> Gender of Therapist<br>
+            <input type="text" name="otherFilters" placeholder="Other (Specify)"><br>
+
+            <h3>2. Therapist Profile Pages</h3>
+            <label>Profile Information:</label><br>
+            <input type="checkbox" name="profileInfo" value="Photos"> Photos<br>
+            <input type="checkbox" name="profileInfo" value="Qualifications"> Qualifications<br>
+            <input type="checkbox" name="profileInfo" value="Video"> Introductory Video<br>
+            <input type="checkbox" name="profileInfo" value="Languages Spoken"> Languages Spoken<br>
+            <input type="checkbox" name="profileInfo" value="Reviews"> Reviews<br>
+            <input type="text" name="otherProfileInfo" placeholder="Other (Specify)"><br>
+
+            <!-- Additional sections can be created similarly -->
+
+            <h2>Section 2: Additional Functional Requirements</h2>
+
+            <h3>1. Data Security and Privacy</h3>
+            <label>Data Security Measures:</label><br>
+            <input type="checkbox" name="security" value="Encryption"> Encryption of User Data<br>
+            <input type="checkbox" name="security" value="Two-Factor Authentication"> Two-Factor Authentication<br>
+            <input type="checkbox" name="security" value="Compliance"> Compliance with PIPEDA and HIPAA<br>
+            <input type="text" name="otherSecurity" placeholder="Other (Specify)"><br>
+
+            <h3>2. Mobile Responsiveness and App Development</h3>
+            <label>Should a mobile app be developed?</label>
+            <input type="checkbox" name="mobileApp" value="Yes"> Yes<br>
+
+            <!-- Additional questions and fields -->
+
+            <button type="submit">Submit</button>
+        </form>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
